@@ -5,33 +5,36 @@ const middlewares = jsonServer.defaults()
 
 server.use(middlewares)
 
-server.use(jsonServer.rewriter({'/api/*':'/$1', '/blog/:resource/:id/show':'/:resource/:id'}));
+//自定义路由需要使用jsonServer.rewrite()进行重定向 不再需要
+server.use(jsonServer.rewriter({ '/api/*': '/$1', '/blog/:resource/:id/show': '/:resource/:id' }));
 
 // 在此添加自定义的路由
 server.get('/echo', (req, res) => {
-  res.jsonp(req.query)
+    res.jsonp(req.query)
 })
 
 server.use(jsonServer.bodyParser)
 
 // 给post的请求返回创建时间的属性
 server.use((req, res, next) => {
-  if (req.method === 'POST') {
-    req.body.createdAt = Date.now()
-  }
-  next()
+    if (req.method === 'POST') {
+        req.body.createdAt = Date.now()
+    }
+    next()
 })
 
 //自定义输出内容jsonp jsonp就是我们输出的数据内容的集合 里面包含了json的数据集合
 router.render = (req, res) => {
     res.jsonp({
-      msg:'ok',
-      code:1,
-      body: res.locals.data
+        msg: 'ok',
+        code: 1,
+        body: res.locals.data
     })
 }
 
-server.use(router)
+//这个就是相当于把当前所有的路由地址挂载在'/router'下
+server.use('/api', router);
+
 server.listen(3000, () => {
-  console.log('JSON Server is running')
+    console.log('JSON Server is running')
 })
