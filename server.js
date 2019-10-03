@@ -1,11 +1,19 @@
+//后台管理文件 自定义路由
 const jsonServer = require('json-server')
-const server = jsonServer.create()
-const router = jsonServer.router('db.json')
-const middlewares = jsonServer.defaults()
+const server = jsonServer.create()   //API returns an Express server
+const router = jsonServer.router('db1.json')   //这里定义了基本的数据文件 托管了db.json文件  return JSON Server router
+const middlewares = jsonServer.defaults()   //API Returns middlewares used by JSON Server
 
-server.use(middlewares);
+//使用中间件
+server.use(middlewares)
 
-// 在此添加自定义的路由
+//代码控制添加自定义路由 这个方法可以替代route.js的作用 需要用到jsonServer.rewrite()的方法进行重定向    路由重定向方法一
+// server.use(jsonServer.rewriter({
+//     '/api/*': '/$1',
+//     '/blog/:resource/:id/show': '/:resource/:id'
+// }))
+
+// 在此添加自定义的路由 add custom routes before JSON Server router
 server.get('/echo', (req, res) => {
     res.jsonp(req.query)
 });
@@ -19,7 +27,7 @@ server.post('/authorized', (req, res) => {  //authorized 就是这个hook
         res.jsonp({
             code: 1,
             msg: 'login success!',
-            auth_token: 'this is the test data-cookie!'
+            auth_token: 'sdaslask@sdk!sd123sad@sda21SDDSAsda2'
         });
     } else {
         res.jsonp({
@@ -29,7 +37,7 @@ server.post('/authorized', (req, res) => {  //authorized 就是这个hook
     }
 });
 
-// 给post的请求返回创建时间的属性
+// 给post的请求返回创建时间的属性 这是post数据部分
 server.use((req, res, next) => {
     if (req.method === 'POST') {
         req.body.createdAt = Date.now()
@@ -37,31 +45,32 @@ server.use((req, res, next) => {
     next()
 });
 
-//这是挂载登录校验的中间件 只处理/api开头的地址
+//使用一个中间件 进行用户校验 这里只处理'/api'开头的请求
 server.use('/api', (req, res, next) => {
-    //约定 发送ajax请求 必须带一个header: Authorization:xasdasdSasasdasSDass;
-    // req.get(Authorization)就是你自己校验的逻辑  Authorization就是需在请求头里面放的东西
-    if (req.get('Authorization')) { // add your authorization logic here
-        next() // continue to JSON Server router
+    //约定 发送ajax请求:必须带请求头header:Authorization: sdasxasasdkjnmn1asdnmas(加密字符串)
+    //加密的字符串是前端登录的时候 后台生成并返回给客户端的一个凭证  所以这里的请求头必须带了Authorization属性才能访问到后台的数据内容
+    if (req.get("Authorization")) { //add your authorization logic here
+        next() //next()表示执行下一个中间件
     } else {
+        // res.sendStatus(401)   //给客户端发送一个未验证的字符串 没有登录成功
         res.status(401).jsonp({
-            code:7,
-            msg:'can\'t visit without login'
+            code: 7,  //约定7是未登录
+            msg: 'can\'t vist without login'
         });
     }
 });
 
-//自定义输出内容jsonp jsonp就是我们输出的数据内容的集合 里面包含了json的数据集合
+//自定义输出内容 包装数据成jsonp的形式 就可以跨域了
 router.render = (req, res) => {
     res.jsonp({
         msg: 'ok',
         code: 1,
-        body: res.locals.data
+        data: res.locals.data
     })
 };
 
-//这个就是相当于把当前所有的路由地址挂载在'/api/router'下
-server.use('/api', router);
+//这个相当于把当前设置好的router路由器实例挂载到另一个地址下 '/api' 下了
+server.use('/api', router)
 
 server.listen(3000, () => {
     console.log('JSON Server is running')
