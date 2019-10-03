@@ -47,6 +47,36 @@
     </div>
 
     <script>
+        $(function(){
+            initMenu();
+        });
+
+        function initMenu() {
+            //#region 第一步 加载后台的数据 menu 并且根据数据动态生成左侧的菜单栏
+            $.ajax({
+                url: '/api/site_nav',
+                data: '',
+                type: 'GET',
+                dataType: 'json',
+            }).done(function (resData, status, xhr) {
+                //ajax请求成功之后执行done里面的方法
+                for (var i = 0; i < resData.data.length; i++) {
+                    var childHtml = [];
+                    var childLength = resData.data[i].children.length;
+                    for(var j=0; j<childLength; j++){
+                        var t = resData.data[i].children[j];
+                        childHtml.push('<p><a iconcls="'+ t.iconCls +'" class="menu_link" href="javascript:" url="'+ t.url +'">'+ t.title +'</a></p>');
+                    }
+                    //动态添加 aa panel 
+                    $('#aa').accordion('add', {
+                        title: resData.data[i].title,
+                        iconCls:resData.data[i].iconCls,
+                        content: childHtml.join(''),
+                        selected: false
+                    });
+                    //动态创建子 菜单p标签
+                }
+            });
     </script>
 </body>
 
