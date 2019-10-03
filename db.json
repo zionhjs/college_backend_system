@@ -135,7 +135,7 @@
           "title": "PersonalUserManagement",
           "id": 71,
           "iconCls": "icon-ok",
-          "url": "/userserpersonaluser.html"
+          "url": "/userserpersonalmanagement.html"
         },
         {
           "title": "TeacherManagement",
