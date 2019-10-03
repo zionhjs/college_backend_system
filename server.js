@@ -5,9 +5,6 @@ const middlewares = jsonServer.defaults()
 
 server.use(middlewares)
 
-//自定义路由需要使用jsonServer.rewrite()进行重定向 不再需要
-server.use(jsonServer.rewriter({ '/api/*': '/$1', '/blog/:resource/:id/show': '/:resource/:id' }));
-
 // 在此添加自定义的路由
 server.get('/echo', (req, res) => {
     res.jsonp(req.query)
@@ -32,7 +29,7 @@ router.render = (req, res) => {
     })
 }
 
-//这个就是相当于把当前所有的路由地址挂载在'/router'下
+//这个就是相当于把当前所有的路由地址挂载在'/api/router'下
 server.use('/api', router);
 
 server.listen(3000, () => {
