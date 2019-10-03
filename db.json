@@ -4,7 +4,7 @@
       "title": "ResourceManagement",
       "id": 1,
       "iconCls": "icon-ok",
-      "children": [
+      "children": [  
         {
           "title": "QuestionManagement",
           "id": 11,
@@ -152,7 +152,6 @@
       ]
     }
   ],
-  
   "course": [
     {
       "id": 1000,
