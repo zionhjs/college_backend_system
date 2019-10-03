@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- 引入easyui的css和js -->
+    <link rel="stylesheet" href="./lib/jquery-easyui-1.8.5/themes/bootstrap/easyui.css">
+    <link rel="stylesheet" href="./lib/jquery-easyui-1.8.5/themes/icon.css">
+
+    <!-- jQuery -->
+    <script src="./lib/jquery-easyui-1.8.5/jquery.min.js"></script>
+    <!-- easyui的全部脚本 -->
+    <script src="./lib/jquery-easyui-1.8.5/jquery.easyui.min.js"></script>
+    <!-- 语言包 -->
+    <script src="./lib/jquery-easyui-1.8.5/locale/easyui-lang-zh_CN.js"></script>
+    <!-- 引入js-cookie -->
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+    <!-- 引入ajaxsetup.js这个文件来控制没有cookie时候的登录状况 -->
+    <script src="./js/ajaxsetup.js"></script>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="./style/admin.css">
+    <!-- 引入art-template模版 -->
+    <script src="./lib/template-web.js"></script>
+    <title>AdminPage</title>
+</head>
+
+<body>
+    <div id="cc" class="easyui-layout" data-options="fit:true">
+        <div data-options="region:'north',title:'Top Title',iconCls:'icon-ok',split:true" style="height:100px;">
+            <h1>BackEnd Management System</h1>
+        </div>
+
+        <!-- 导航区域 -->
+        <div data-options="region:'west',title:'West',split:true" style="width:200px;">
+            <div id="aa" class="easyui-accordion" data-options="fit:true" style="width:300px;height:200px;">
+            </div>
+        </div>
+
+        <!-- 中间区域 -->
+        <div data-options="region:'center',title:'center title'" style="padding:5px;background:#eee;">
+            <!-- tab导航区域tt -->
+            <div id="tt" data-options="fit:true" class="easyui-tabs">
+                <div title="UserList" data-options="fit:true, closable:true" style="padding:20px;display:none;">
+                    <h3>Tab1</h3>
+                    <input type="button" value="foldLeft" id="btnCloseNav">
+                    <input type="button" value="ADD-Tab" id="addTab">
+                    <input type="button" value="Select-Tab" id="selectTab">
+                    <input type="button" value="readCookie-token" id="getCookies">
+                </div>
+            </div>
+        </div>
+        <!-- 底部区域 -->
+        <div data-options="region:'south',title:'South Title',split:true" style="height:100px;">
+            <p>copyright@zion_hugn</p>
+        </div>
+    </div>
+
+    <script>
+    </script>
+</body>
+
+</html>

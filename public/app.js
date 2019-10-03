@@ -9,10 +9,10 @@ module.exports = () => {
       {
         // 属性 id 是一个自增数，起始值为 1，每次增 1
         'id|+1': 1000,
-        question_type: '@title(5,10)',
-        types: '@name',
-        question_genre: '@title(6)',
-        'category_Id|1-6': 1
+        question_type: '@name(1)',
+        types: '@title(1)',
+        question_genre: '@title(2)',
+        related:'@boolean()'
       }
     ],
     'course_category|6': [
