@@ -20,6 +20,22 @@ server.use((req, res, next) => {
     next()
 })
 
+//这是挂载登录校验的中间件 只处理/api开头的地址
+server.use('/api', (req, res, next) => {
+    //约定 发送ajax请求 必须带一个header: Authorization:xasdasdSasasdasSDass;
+    //加密的字符串是前端登录的时候 后台生成并返回给客户端登录的凭证
+    
+    // isAuthorized就是你自己校验的逻辑
+    if (isAuthorized(req)) { // add your authorization logic here
+        next() // continue to JSON Server router
+    } else {
+        res.status(401).jsonp({
+            code:7,
+            msg:'can\'t visit without login'
+        });
+    }
+})
+
 //自定义输出内容jsonp jsonp就是我们输出的数据内容的集合 里面包含了json的数据集合
 router.render = (req, res) => {
     res.jsonp({
