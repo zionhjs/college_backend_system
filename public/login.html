@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- 引入easyui的css和js -->
+    <link rel="stylesheet" href="./lib/jquery-easyui-1.8.5/themes/bootstrap/easyui.css">
+    <link rel="stylesheet" href="./lib/jquery-easyui-1.8.5/themes/icon.css">
+
+    <!-- jQuery -->
+    <script src="./lib/jquery-easyui-1.8.5/jquery.min.js"></script>
+    <!-- easyui的全部脚本 -->
+    <script src="./lib/jquery-easyui-1.8.5/jquery.easyui.min.js"></script>
+    <!-- 语言包 -->
+    <script src="./lib/jquery-easyui-1.8.5/locale/easyui-lang-zh_CN.js"></script>
+    <!-- 引入javascript的加密算法 -->
+    <script src="./lib/sha1.js"></script>
+    <!-- 引入js-cookie -->
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+    <title>LoginPage</title>
+
+    <style>
+        html, body, div, td, table, form, tr{
+            padding: 0;
+            margin: 0;
+        }
+        .login-wrap{
+            width: 300px;
+            height: 200px;
+            border:1px solid #ccc;
+            position:absolute;
+            top:50%;
+            left:50%;
+            margin-left:-151px;
+            margin-top:-101px;
+        }
+        #frmLogin{
+            padding: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-wrap">
+        <form action="" id="frmLogin">
+            <table>
+                <tr>
+                    <td>UserName:</td>
+                    <td>
+                        <input type="text" class="easyui-textbox" data-options="iconCls:'icon-man', prompt:'username', required:true, validType:['length[3,8]']" name="username">
+                    </td>
+                </tr>
+                <tr>
+                    <td>PassWord:</td>
+                    <td>
+                        <input type="text" value='google' class="easyui-passwordbox" data-options="iconCls:'icon-lock', required:true, validType:'length[6,20]'" name="userpwd">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="button" value="Login" id="btnLogin">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <script>
+        $(function(){
+            $('#btnLogin').on('click', function(){
+                if($('#frmLogin').form('validate')){
+                    //把表单中的数据拿到 并且对密码加密
+                    var frmDataArr = $('#frmLogin').serializeArray();
+                    frmDataArr[1].value = b64_sha1(frmDataArr[1].value); //b64_sha1给密码加密
+                    // console.dir(frmDataArr);   //这里可以查看结构 然后获得加密后的密码值
+
+                    //发送ajax请求 校验用户名和密码是否正确
+                    $.ajax({
+                        url:'/authorized',
+                        type:'POST',
+                        dataType:'json',
+                        data:frmDataArr,
+                        success:function(data){  //success 请求成功后的回调函数
+                            //登录成功:{code:1, msg:'login success', auth_token:'asdasdasda@Sd@asSDA21'}
+                            //登录失败:{code:8, msg:'login failed, wrong information...'}
+                            if(data.code === 8){
+                                $.messager.alert('notice', 'login failed!', 'warning');
+                            }else{
+                                //后台返回的登录的token 放到我们的cookie中 主页面就可以通过cookie拿到auth_token
+                                Cookies.set('auth_token', data.auth_token, {path:'/'});
+                                // $.messager.alert('notice', 'login success!', 'info');
+                                window.location.href = './admin.html';
+                            }
+                        }
+                    });
+                }else{
+                    $.messager.alert('Notice-Info', 'Type-in valid username&password', 'warning');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
