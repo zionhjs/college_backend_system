@@ -35,7 +35,8 @@
 
         <!-- right-side Nav-Region -->
         <div data-options="region:'west',split:false" style="width:200px;">
-            <div id="aa" class="easyui-accordion" data-options="fit:true" style="width:300px;height:200px; text-align:center;">
+            <div id="aa" class="easyui-accordion" data-options="fit:true"
+                style="width:300px;height:200px; text-align:center;">
             </div>
         </div>
 
@@ -64,18 +65,17 @@
                 for (var i = 0; i < resData.data.length; i++) {
                     var childHtml = [];
                     var childLength = resData.data[i].children.length;
-                    for(var j=0; j<childLength; j++){
+                    for (var j = 0; j < childLength; j++) {
                         var t = resData.data[i].children[j];
-                        childHtml.push('<p><a iconcls="'+ t.iconCls +'" class="menu_link" href="javascript:" url="'+ t.url +'">'+ t.title +'</a></p>');
+                        childHtml.push('<p><a iconcls="' + t.iconCls + '" class="menu_link" href="javascript:" url="' + t.url + '">' + t.title + '</a></p>');
                     }
                     //动态添加 aa panel 
                     $('#aa').accordion('add', {
                         title: resData.data[i].title,
-                        iconCls:resData.data[i].iconCls,
+                        iconCls: resData.data[i].iconCls,
                         content: childHtml.join(''),
                         selected: false
                     });
-                    //动态创建子 菜单p标签
                 }
             });
     </script>
