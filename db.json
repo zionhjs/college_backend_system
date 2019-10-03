@@ -6,60 +6,148 @@
       "iconCls": "icon-ok",
       "children": [
         {
-          "title": "userManagement",
+          "title": "QuestionManagement",
           "id": 11,
           "iconCls": "icon-ok",
-          "url": "/userlist.html"
+          "url": "/userquestion.html"
         },
         {
-          "title": "authorityManagement",
+          "title": "KnowledgeManagement",
           "id": 12,
           "iconCls": "icon-ok",
-          "url": "/useradmin.html"
+          "url": "/userknowledge.html"
         },
         {
-          "title": "roleManagement",
+          "title": "MaterialManagement",
           "id": 13,
           "iconCls": "icon-ok",
-          "url": "/userrole.html"
+          "url": "/usermaterial.html"
+        },
+        {
+          "title": "CourseManagement",
+          "id": 14,
+          "iconCls": "icon-ok",
+          "url": "/usercourse.html"
+        },
+        {
+          "title": "PracticeManagement",
+          "id": 15,
+          "iconCls": "icon-ok",
+          "url": "/userpractice.html"
         }
       ]
     },
     {
-      "title": "goodsManagement",
+      "title": "CoursePackageManagement",
       "id": 2,
       "iconCls": "icon-ok",
       "children": [
         {
-          "title": "goodslist",
+          "title": "CourseCategoryManagement",
           "id": 21,
           "iconCls": "icon-ok",
-          "url": "/userlist.html"
+          "url": "/usercoursecategory.html"
         },
         {
-          "title": "dealerManagement",
+          "title": "CourseContentManagement",
           "id": 22,
           "iconCls": "icon-ok",
-          "url": "/useradmin.html"
+          "url": "/usercoursecontent.html"
         }
       ]
     },
     {
-      "title": "typeManagement",
+      "title": "SalesManagement",
       "id": 3,
       "iconCls": "icon-ok",
       "children": [
         {
-          "title": "typelist",
+          "title": "CourseSalesManagement",
           "id": 31,
           "iconCls": "icon-ok",
-          "url": "/userlist.html"
+          "url": "/usersales.html"
         },
         {
-          "title": "typeAdd",
+          "title": "OrderManagement",
           "id": 32,
           "iconCls": "icon-ok",
-          "url": "/useradmin.html"
+          "url": "/userorder.html"
+        }
+      ]
+    },
+    {
+      "title": "SerialNumberManagement",
+      "id": 4,
+      "iconCls": "icon-ok",
+      "children": [
+        {
+          "title": "SerialNumberGenerate",
+          "id": 41,
+          "iconCls": "icon-ok",
+          "url": "/userserialgenerate.html"
+        },
+        {
+          "title": "SerialNumberSearch",
+          "id": 42,
+          "iconCls": "icon-ok",
+          "url": "/userserialsearch.html"
+        }
+      ]
+    },
+    {
+      "title": "AuxiliaryContentManagement",
+      "id": 5,
+      "iconCls": "icon-ok",
+      "children": [
+        {
+          "title": "HomePageRecommendationManagement",
+          "id": 51,
+          "iconCls": "icon-ok",
+          "url": "/userserrecommendation.html"
+        }
+      ]
+    },
+    {
+      "title": "StatisticalManagement",
+      "id": 6,
+      "iconCls": "icon-ok",
+      "children": [
+        {
+          "title": "CourseStatistic",
+          "id": 61,
+          "iconCls": "icon-ok",
+          "url": "/usersercoursestatistica.html"
+        },
+        {
+          "title": "SerialNumberStatistic",
+          "id": 62,
+          "iconCls": "icon-ok",
+          "url": "/userserserialstatistic.html"
+        }
+      ]
+    },
+    {
+      "title": "UserManagement",
+      "id": 7,
+      "iconCls": "icon-ok",
+      "children": [
+        {
+          "title": "PersonalUserManagement",
+          "id": 71,
+          "iconCls": "icon-ok",
+          "url": "/userserpersonaluser.html"
+        },
+        {
+          "title": "TeacherManagement",
+          "id": 72,
+          "iconCls": "icon-ok",
+          "url": "/userserteachermanage.html"
+        },
+        {
+          "title": "AdminManagement",
+          "id": 73,
+          "iconCls": "icon-ok",
+          "url": "/userseradminmanage.html"
         }
       ]
     }
