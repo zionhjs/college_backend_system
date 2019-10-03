@@ -28,13 +28,30 @@
 
 <body>
     <div id="cc" class="easyui-layout" data-options="fit:true">
-        <div data-options="region:'north',iconCls:'icon-ok', collapsible:false" style="height:75px; vertical-align: middle;">
+        <div data-options="region:'north',iconCls:'icon-ok', collapsible:false"
+            style="height:75px; vertical-align: middle;">
             <h1>BackEnd Management System</h1>
         </div>
 
         <!-- right-side Nav-Region -->
         <div data-options="region:'west',title:'West',split:false" style="width:200px;">
             <div id="aa" class="easyui-accordion" data-options="fit:true" style="width:300px;height:200px;">
+                <div title="resource-management" data-options="iconCls:'icon-save'"
+                    style="overflow:auto; padding:10px;">
+                    <div class="div-box"><a href="#">Question-Management</a></div>
+                    <div class="div-box"><a href="#">Knowledge-Management</a></div>
+                    <div class="div-box"><a href="#">Material-Management</a></div>
+                    <div class="div-box"><a href="#">Course-Management</a></div>
+                    <div class="div-box"><a href="#">Practice-Management</a></div>
+                </div>
+                <div title="resource-management" data-options="iconCls:'icon-save'"
+                    style="overflow:auto; padding:10px;">
+                    <div class="div-box"><a href="#">Question-Management</a></div>
+                    <div class="div-box"><a href="#">Knowledge-Management</a></div>
+                    <div class="div-box"><a href="#">Material-Management</a></div>
+                    <div class="div-box"><a href="#">Course-Management</a></div>
+                    <div class="div-box"><a href="#">Practice-Management</a></div>
+                </div>
             </div>
         </div>
 
@@ -47,7 +64,7 @@
     </div>
 
     <script>
-        $(function(){
+        $(function () {
             initMenu();
         });
 
@@ -63,14 +80,14 @@
                 for (var i = 0; i < resData.data.length; i++) {
                     var childHtml = [];
                     var childLength = resData.data[i].children.length;
-                    for(var j=0; j<childLength; j++){
+                    for (var j = 0; j < childLength; j++) {
                         var t = resData.data[i].children[j];
-                        childHtml.push('<p><a iconcls="'+ t.iconCls +'" class="menu_link" href="javascript:" url="'+ t.url +'">'+ t.title +'</a></p>');
+                        childHtml.push('<p><a iconcls="' + t.iconCls + '" class="menu_link" href="javascript:" url="' + t.url + '">' + t.title + '</a></p>');
                     }
                     //动态添加 aa panel 
                     $('#aa').accordion('add', {
                         title: resData.data[i].title,
-                        iconCls:resData.data[i].iconCls,
+                        iconCls: resData.data[i].iconCls,
                         content: childHtml.join(''),
                         selected: false
                     });
