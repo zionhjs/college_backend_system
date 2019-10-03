@@ -1,4 +1,69 @@
 {
+  "site_nav": [
+    {
+      "title": "ResourceManagement",
+      "id": 1,
+      "iconCls": "icon-ok",
+      "children": [
+        {
+          "title": "userManagement",
+          "id": 11,
+          "iconCls": "icon-ok",
+          "url": "/userlist.html"
+        },
+        {
+          "title": "authorityManagement",
+          "id": 12,
+          "iconCls": "icon-ok",
+          "url": "/useradmin.html"
+        },
+        {
+          "title": "roleManagement",
+          "id": 13,
+          "iconCls": "icon-ok",
+          "url": "/userrole.html"
+        }
+      ]
+    },
+    {
+      "title": "goodsManagement",
+      "id": 2,
+      "iconCls": "icon-ok",
+      "children": [
+        {
+          "title": "goodslist",
+          "id": 21,
+          "iconCls": "icon-ok",
+          "url": "/userlist.html"
+        },
+        {
+          "title": "dealerManagement",
+          "id": 22,
+          "iconCls": "icon-ok",
+          "url": "/useradmin.html"
+        }
+      ]
+    },
+    {
+      "title": "typeManagement",
+      "id": 3,
+      "iconCls": "icon-ok",
+      "children": [
+        {
+          "title": "typelist",
+          "id": 31,
+          "iconCls": "icon-ok",
+          "url": "/userlist.html"
+        },
+        {
+          "title": "typeAdd",
+          "id": 32,
+          "iconCls": "icon-ok",
+          "url": "/useradmin.html"
+        }
+      ]
+    }
+  ],
   "course": [
     {
       "id": 1000,

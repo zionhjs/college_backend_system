@@ -75,14 +75,14 @@
                 for (var i = 0; i < resData.data.length; i++) {
                     var childHtml = [];
                     var childLength = resData.data[i].children.length;
-                    for (var j = 0; j < childLength; j++) {
+                    for(var j=0; j<childLength; j++){
                         var t = resData.data[i].children[j];
-                        childHtml.push('<p><a iconcls="' + t.iconCls + '" class="menu_link" href="javascript:" url="' + t.url + '">' + t.title + '</a></p>');
+                        childHtml.push('<p><a iconcls="'+ t.iconCls +'" class="menu_link" href="javascript:" url="'+ t.url +'">'+ t.title +'</a></p>');
                     }
                     //动态添加 aa panel 
                     $('#aa').accordion('add', {
                         title: resData.data[i].title,
-                        iconCls: resData.data[i].iconCls,
+                        iconCls:resData.data[i].iconCls,
                         content: childHtml.join(''),
                         selected: false
                     });
