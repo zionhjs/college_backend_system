@@ -61,6 +61,12 @@
     <div class="search-area">
         <input id="ss" />
         <input type="button" value="SEARCH">
+        <div id="mm" style="width:120px">
+            <div data-options="name:'question_type'">QuestionType</div>
+            <div data-options="name:'types'">Types</div>
+            <div data-options="name:'question_genre'">QuestionGenre</div>
+            <div data-options="name:'related'">Related</div>
+        </div>
     </div>
 
     <!-- datagrid -->
@@ -300,7 +306,7 @@
         //#region initSearchBox 搜索时候的方法
         function initSearchBox() {
             $('#ss').searchbox({
-                width: 300,
+                width: 200,
                 searcher: function (value, name) {
                     //param 是设置传给iniTable的参数  _like代表模糊搜索
                     var str = '{"' + name + '_like":"' + value + '"}';
