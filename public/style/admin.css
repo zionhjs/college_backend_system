@@ -3,23 +3,21 @@
 }
 #cc .head-container{
     display:flex;
+    align-items:center;
 }
 #cc .head-container h1{
     display:inline;
 }
 #cc .head-container h3{
     display:inline;
-    line-height:30px;
 }
 #cc .triangle{
-    width: 0;
-    height: 0;
-    border-left: 9px solid transparent;
-    border-right: 9px solid transparent;
-    border-top: 15px solid #515151;
-    border-bottom: 15px solid transparent;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 9px solid #515151;
     display: inline;
-    line-height:30px;
+    display:relative;
+    top:30px;
 }
 
 .p-box{
