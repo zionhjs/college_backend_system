@@ -85,6 +85,23 @@
                     }
                 ]],
 
+                //#region DataGrid属性 loader定义如何从远程服务器加载数据 
+                loader: function (param, successfn, errorfn) {
+                    $.ajax({
+                        url: '/api/course',
+                        data: param,  // 增加改变成了 _page 和_limit  
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (resData, status, xhr) {
+                            var total = parseInt(xhr.getResponseHeader('X-Total-Count'));
+                            var datagridData = { rows: resData.data, total: total };
+                            successfn(datagridData);
+                        },
+                        error: errorfn
+                    });
+                },
+                //#endregion
+
                 //#region 对应 CRUD 的事件处理
                 onHeaderContextMenu: function (e, field) {
                 },
@@ -95,7 +112,7 @@
                     param._sort = 'id';  //排序
                     param._order = 'desc';  //降序
                 },
-                onLoadSuccess: function (data) {  // 后台请求成功之后，自动调用次方法
+                onLoadSuccess: function (data) {  // 后台请求成功之后，自动调用此方法
                     console.log(data);
                 },
                 onDblClickRow: function (rowIndex, rowData) {  //双击row之后发生的事件
@@ -145,117 +162,6 @@
                     //调用datagrid的方法 isEditing的状态改变了 所以要刷新整行
                     $('#coursett').datagrid('refreshRow', rowIndex);
                 },
-                //#endregion
-
-                //#region DataGrid属性 loader定义如何从远程服务器加载数据 
-                loader: function (param, successfn, errorfn) {
-                    $.ajax({
-                        url: '/api/course',
-                        data: param,  // 增加改变成了 _page 和_limit  
-                        type: 'GET',
-                        dataType: 'json',
-                        success: function (resData, status, xhr) {
-                            var total = parseInt(xhr.getResponseHeader('X-Total-Count'));
-                            var datagridData = { rows: resData.data, total: total };
-                            successfn(datagridData);
-                        },
-                        error: errorfn
-                    });
-                },
-                //#endregion
-
-                //#region 表格头部的toolbar工具栏
-                toolbar: [{
-                    id: 'btnDownShelf',
-                    text: 'ADD',
-                    iconCls: 'icon-add',
-                    handler: function () {
-                        //弹出一个添加的层出来
-                        $('.add-dialog').dialog({
-                            title: 'add course info',
-                            width: 300,
-                            height: 300,
-                            modal: true,
-                            minimizable: true,
-                            maximizabke: true,
-                            resizable: true,
-                            buttons: [{
-                                text: 'Save',
-                                iconCls: 'icon-ok',
-                                handler: function () {
-                                    //往后台保存数据 成功之后提示成功消息 并关闭对话框
-                                    var arrData = $('#frmAdd').serializeArray();
-                                    arrData.push({
-                                        name: 'id',
-                                        value: Date.now()
-                                    });
-                                    $.ajax({
-                                        url: '/api/course',
-                                        type: 'POST',
-                                        data: arrData,
-                                        dataType: 'json'
-                                    }).done(function (data) {
-                                        //关闭对话框
-                                        $('#frmAdd')[0].reset();   //清空表单的内容 这里用了刷新
-                                        $('.add-dialog').dialog('close');   //关闭对话框
-                                        //刷新表格
-                                        $('#coursett').datagrid('reload');
-                                        //提醒用户添加成功
-                                        $.messager.show({
-                                            title: 'add-info',
-                                            msg: 'add-success!',
-                                            timeout: 1000
-                                        });
-                                    }).fail(function () {
-                                        $.messager.alert('add-info', 'add-failed, try again!', 'warning');
-                                    });
-                                }
-                            }, {
-                                text: 'Close',
-                                iconCls: 'icon-no',
-                                handler: function () {
-                                    $.messager.confirm('remind', 'sure cancel add?', function (r) {
-                                        if (!r) {
-                                            return;
-                                        }
-                                        //清空添加的表单 关闭对话框
-                                        $('#frmAdd')[0].reset();   //清空表单的内容 这里用了刷新
-                                        $('.add-dialog').dialog('close');   //关闭对话框
-                                    });
-                                }
-                            }]
-                        });
-                    }
-                }, {
-                    id: 'clearAllSelection',
-                    text: 'ClearSelection',
-                    iconCls: 'icon-clear',
-                    handler: function () {
-                        $('#coursett').datagrid('clearSelections');
-                    }
-                },
-                {
-                    id: 'btnDelete',
-                    text: 'DELETE',
-                    iconCls: 'icon-cancel',
-                    handler: function () {
-                        // deleteRow(index)
-                        var row = $('#coursett').datagrid('getSelected');
-                        if (row) {
-                            var delIndex = $('#coursett').datagrid('getRowIndex', row);
-                            deleteRow(delIndex);
-                        } else {
-                            $.messager.alert('notice', 'selectThendelete', 'warning');
-                        }
-                    }
-                }, {
-                    id: 'btnEdit',
-                    text: 'EDIT',
-                    iconCls: 'icon-edit',
-                    handler: function () {
-
-                    }
-                }],
                 //#endregion
             });
             //#endregion
