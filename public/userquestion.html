@@ -26,11 +26,44 @@
         <input type="button" value="Add Types">
     </div>
 
+    <!-- 分割线 -->
     <div class="box-line"></div>
 
+    <!-- datagrid -->
     <div class="table-box">
         <table id="coursett"></table>
     </div>
+
+    <!-- 双击Row 显示课程详细信息的对话框  结合art-template模版 -->
+    <div class="info-dialog" style="display:none">
+        <div class="tb-course-data"></div>
+    </div>
+    <!-- art-template模版 -->
+    <script id="showInfoDialogTempl" type="text/html">
+            <h3>Display Course Info</h3>
+            <table>
+                    <tr>
+                        <td>CourseId</td>
+                        <td id="cId">{{id}}</td>
+                    </tr>
+                    <tr>
+                        <td>CourseName</td>
+                        <td id="cName">{{course_name}}</td>
+                    </tr>
+                    <tr>
+                        <td>CourseCollege</td>
+                        <td id="cCol">{{college}}</td>
+                    </tr>
+                    <tr>
+                        <td>CourseAuthor</td>
+                        <td id="cAut">{{author}}</td>
+                    </tr>
+                    <tr>
+                        <td>CourseCategory</td>
+                        <td id="cCat">{{category_Id}}</td>
+                    </tr>
+                </table>
+    </script>
 
     <script>
         $(function () {
@@ -164,7 +197,9 @@
             //#region 初始化底部分页器 模版
             var pager = $('#coursett').datagrid('getPager');
             pager.pagination({
-                layout: ['list', 'sep', 'first', 'prev', 'sep', 'links', 'next', 'last', 'refresh', 'last']
+                displayMsg: '{total} questions in total',
+                beforePageText: 'JumpTo',
+                layout: ['first', 'prev', 'sep', 'links', 'sep', 'next', 'last', 'input'],
             });
             //#endregion
         }
