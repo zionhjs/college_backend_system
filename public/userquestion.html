@@ -44,7 +44,7 @@
         });
 
         //#region initTable在 courselist  tab中 加载表格的数据
-        function initTable() {   //增加param参数 主要是为了提供搜索方便
+        function initTable(param) {   //增加param参数 主要是为了提供搜索方便
             //#region 表格的模版 
             $('#coursett').datagrid({
                 // url: '/api/course',//rows:一页有多少条，page：请求当前页
@@ -59,7 +59,7 @@
                 pageSize: 10,   // 默认一页多少条
                 pageNumber: 1,  // 默认显示第几页
                 pageList: [10, 20, 30, 40, 50, 60],
-                queryParams: null,   //让表格在加载数据的时候，额外传输的数据
+                queryParams: param,   //让表格在加载数据的时候，额外传输的数据
                 columns: [[
                     { field: 'id', title: 'ID', width: 80 },
                     { field: 'question_type', title: 'QuestionName', width: 120, editor: { type: 'text', options: { required: true } } },
@@ -84,23 +84,6 @@
                         }
                     }
                 ]],
-
-                //#region DataGrid属性 loader定义如何从远程服务器加载数据 
-                loader: function (param, successfn, errorfn) {
-                    $.ajax({
-                        url: '/api/course',
-                        data: param,  // 增加改变成了 _page 和_limit  
-                        type: 'GET',
-                        dataType: 'json',
-                        success: function (resData, status, xhr) {
-                            var total = parseInt(xhr.getResponseHeader('X-Total-Count'));
-                            var datagridData = { rows: resData.data, total: total };
-                            successfn(datagridData);
-                        },
-                        error: errorfn
-                    });
-                },
-                //#endregion
 
                 //#region 对应 CRUD 的事件处理
                 onHeaderContextMenu: function (e, field) {
@@ -161,6 +144,23 @@
                     rowData.isEditing = false;
                     //调用datagrid的方法 isEditing的状态改变了 所以要刷新整行
                     $('#coursett').datagrid('refreshRow', rowIndex);
+                },
+                //#endregion
+
+                //#region DataGrid属性 loader定义如何从远程服务器加载数据 
+                loader: function (param, successfn, errorfn) {
+                    $.ajax({
+                        url: '/api/course',
+                        data: param,  // 增加改变成了 _page 和_limit  
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (resData, status, xhr) {
+                            var total = parseInt(xhr.getResponseHeader('X-Total-Count'));
+                            var datagridData = { rows: resData.data, total: total };
+                            successfn(datagridData);
+                        },
+                        error: errorfn
+                    });
                 },
                 //#endregion
             });
