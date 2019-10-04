@@ -28,3 +28,12 @@
     border-top: 8px solid #515151;
     margin:0 0 0 9px;
 }
+
+#aa .p-box{
+    height:30px;
+    border-bottom:1px solid #515151;
+}
+#aa .p-box a{
+    text-decoration: none;
+    color:#515151;
+}

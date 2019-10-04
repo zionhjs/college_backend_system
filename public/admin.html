@@ -28,7 +28,7 @@
 
 <body>
     <div id="cc" class="easyui-layout" data-options="fit:true">
-        <div class="head-container" data-options="region:'north',iconCls:'icon-ok',split:true" style="height:100px;">
+        <div class="head-container" data-options="region:'north',iconCls:'icon-ok',split:false" style="height:100px;">
             <div class="head-left">
                 <h1>BackEnd Management System</h1>
             </div>
@@ -41,7 +41,7 @@
 
         <!-- 导航区域 -->
         <div data-options="region:'west',split:true" style="width:200px;">
-            <div id="aa" class="easyui-accordion" data-options="fit:true,multiple:true"
+            <div id="aa" class="easyui-accordion" data-options="fit:true, multiple:true"
                 style="width:400px;height:900px;">
             </div>
         </div>
@@ -72,7 +72,7 @@
                     var childLength = resData.data[i].children.length;
                     for (var j = 0; j < childLength; j++) {
                         var t = resData.data[i].children[j];
-                        childHtml.push('<p class="p-box"><a class="menu_link" href="javascript:">' + t.title + '</a></p>');
+                        childHtml.push('<p class="p-box"><a class="menu_link" href="javascript:" url="'+ t.url +'">' + t.title + '</a></p>');
                     }
                     //动态添加 aa panel 
                     $('#aa').accordion('add', {
