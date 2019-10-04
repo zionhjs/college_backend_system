@@ -1,7 +1,12 @@
 #cc p{
     text-align:center;
 }
-.div-box{
+
+.p-box{
     height:30px;
     border-bottom:1px solid #515151;
+}
+.p-box a{
+    color:#515151;
+    text-decoration:none;
 }

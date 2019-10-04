@@ -34,14 +34,14 @@
 
         <!-- 导航区域 -->
         <div data-options="region:'west',split:true" style="width:200px;">
-            <div id="aa" class="easyui-accordion" data-options="fit:true" style="width:300px;height:200px;">
+            <div id="aa" class="easyui-accordion" data-options="fit:true,multiple:true" style="width:400px;height:900px;">
             </div>
         </div>
 
         <!-- 中间区域 -->
-        <div data-options="region:'center'" style="padding:5px;background:#eee;">
+        <div data-options="region:'center'" style="padding:0;background:white">
             <!-- tab导航区域tt -->
-            <div id="tt" data-options="fit:true" class="easyui-tabs">
+            <div id="tt" data-options="fit:false, border:true" class="easyui-tabs">
             </div>
         </div>
     </div>
@@ -64,7 +64,7 @@
                     var childLength = resData.data[i].children.length;
                     for(var j=0; j<childLength; j++){
                         var t = resData.data[i].children[j];
-                        childHtml.push('<p><a iconcls="'+ t.iconCls +'" class="menu_link" href="javascript:" url="'+ t.url +'">'+ t.title +'</a></p>');
+                        childHtml.push('<p class="p-box"><a class="menu_link" href="javascript:">'+ t.title +'</a></p>');
                     }
                     //动态添加 aa panel 
                     $('#aa').accordion('add', {
@@ -90,8 +90,7 @@
                 $('#tt').tabs('add', {
                     title: title, 
                     closable:true,
-                    href: url,
-                    iconCls: iconcls
+                    href: url
                 })
             });
             //#endregion
