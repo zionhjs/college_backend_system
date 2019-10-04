@@ -23,33 +23,30 @@
     <!-- head 区域 -->
     <div class="question-head">
         <p>Resource Management > Question Management</p>
-        <input type="button" value="Add Types">
+        <input class="addTypes" type="button" value="Add Types">
     </div>
     <!-- 添加数据form区域 添加课程的对话框 -->
     <div class="add-dialog">
         <form id="frmAdd">
             <table>
                 <tr>
-                    <td>CourseName</td>
-                    <td><input type="text" name="course_name" id="course_name"></td>
+                    <td>QuestionType</td>
+                    <td><input type="text" name="question_type" id="question_type"></td>
                 </tr>
                 <tr>
-                    <td>Author</td>
-                    <td><input type="text" name="author" id="author"></td>
+                    <td>Types</td>
+                    <td><input type="text" name="types" id="types"></td>
                 </tr>
                 <tr>
-                    <td>College</td>
-                    <td><input type="text" name="college" id="college"></td>
+                    <td>QuestionGenre</td>
+                    <td><input type="text" name="question_genre" id="question_genre"></td>
                 </tr>
                 <tr>
-                    <td>Category</td>
+                    <td>RelatedOrNot</td>
                     <td>
-                        <select name="category_Id" id="category_Id">
-                            <option value="1">categroy1</option>
-                            <option value="2">categroy2</option>
-                            <option value="3">categroy3</option>
-                            <option value="4">categroy4</option>
-                            <option value="5">categroy5</option>
+                        <select name="related" id="related">
+                            <option value="true">True</option>
+                            <option value="false">False</option>
                         </select>
                     </td>
                 </tr>
@@ -69,7 +66,7 @@
     <div class="info-dialog" style="display:none">
         <div class="tb-course-data"></div>
     </div>
-    <!-- art-template模版 -->
+    <!-- 对应的art-template模版 -->
     <script id="showInfoDialogTempl" type="text/html">
             <h3>Display Course Info</h3>
             <table>
@@ -232,6 +229,65 @@
                 layout: ['first', 'prev', 'sep', 'links', 'sep', 'next', 'last', 'input'],
             });
             //#endregion
+
+            //点击addTypes弹出的添加form
+            $('.addTypes').on('click', function () {
+                $('.add-dialog').dialog({
+                    title: 'add course info',
+                    width: 300,
+                    height: 300,
+                    modal: true,
+                    minimizable: true,
+                    maximizabke: true,
+                    resizable: true,
+                    buttons: [{
+                        text: 'Save',
+                        iconCls: 'icon-ok',
+                        handler: function () {
+                            //往后台保存数据 成功之后提示成功消息 并关闭对话框
+                            var arrData = $('#frmAdd').serializeArray();
+                            console.dir(arrData);
+                            arrData.push({
+                                name: 'id',
+                                value: Date.now()
+                            });
+                            $.ajax({
+                                url: '/api/course',
+                                type: 'POST',
+                                data: arrData,
+                                dataType: 'json'
+                            }).done(function (data) {
+                                //关闭对话框
+                                $('#frmAdd')[0].reset();   //清空表单的内容 这里用了刷新
+                                $('.add-dialog').dialog('close');   //关闭对话框
+                                //刷新表格
+                                $('#coursett').datagrid('reload');
+                                //提醒用户添加成功
+                                $.messager.show({
+                                    title: 'add-info',
+                                    msg: 'add-success!',
+                                    timeout: 1000
+                                });
+                            }).fail(function () {
+                                $.messager.alert('add-info', 'add-failed, try again!', 'warning');
+                            });
+                        }
+                    }, {
+                        text: 'Close',
+                        iconCls: 'icon-no',
+                        handler: function () {
+                            $.messager.confirm('remind', 'sure cancel add?', function (r) {
+                                if (!r) {
+                                    return;
+                                }
+                                //清空添加的表单 关闭对话框
+                                $('#frmAdd')[0].reset();   //清空表单的内容 这里用了刷新
+                                $('.add-dialog').dialog('close');   //关闭对话框
+                            });
+                        }
+                    }]
+                });
+            })
         }
         //#endregion
 
