@@ -24,3 +24,7 @@
     margin:30px;
     border:1px solid #919191;
 }
+
+.add-dialog{
+    display:none;
+}

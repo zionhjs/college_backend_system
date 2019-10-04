@@ -25,6 +25,37 @@
         <p>Resource Management > Question Management</p>
         <input type="button" value="Add Types">
     </div>
+    <!-- 添加数据form区域 添加课程的对话框 -->
+    <div class="add-dialog">
+        <form id="frmAdd">
+            <table>
+                <tr>
+                    <td>CourseName</td>
+                    <td><input type="text" name="course_name" id="course_name"></td>
+                </tr>
+                <tr>
+                    <td>Author</td>
+                    <td><input type="text" name="author" id="author"></td>
+                </tr>
+                <tr>
+                    <td>College</td>
+                    <td><input type="text" name="college" id="college"></td>
+                </tr>
+                <tr>
+                    <td>Category</td>
+                    <td>
+                        <select name="category_Id" id="category_Id">
+                            <option value="1">categroy1</option>
+                            <option value="2">categroy2</option>
+                            <option value="3">categroy3</option>
+                            <option value="4">categroy4</option>
+                            <option value="5">categroy5</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
 
     <!-- 分割线 -->
     <div class="box-line"></div>
@@ -43,24 +74,24 @@
             <h3>Display Course Info</h3>
             <table>
                     <tr>
-                        <td>CourseId</td>
+                        <td>ID</td>
                         <td id="cId">{{id}}</td>
                     </tr>
                     <tr>
-                        <td>CourseName</td>
-                        <td id="cName">{{course_name}}</td>
+                        <td>QuestionType</td>
+                        <td id="cName">{{question_type}}</td>
                     </tr>
                     <tr>
-                        <td>CourseCollege</td>
-                        <td id="cCol">{{college}}</td>
+                        <td>Types</td>
+                        <td id="cCol">{{types}}</td>
                     </tr>
                     <tr>
-                        <td>CourseAuthor</td>
-                        <td id="cAut">{{author}}</td>
+                        <td>QuestionGenre</td>
+                        <td id="cAut">{{question_genre}}</td>
                     </tr>
                     <tr>
-                        <td>CourseCategory</td>
-                        <td id="cCat">{{category_Id}}</td>
+                        <td>RelatedOrNot</td>
+                        <td id="cCat">{{related}}</td>
                     </tr>
                 </table>
     </script>
@@ -147,7 +178,6 @@
                         width: 400,
                         height: 300,
                         modal: true,
-                        iconCls: 'icon-no',
                         buttons: [{
                             text: 'close',
                             iconCls: 'icon-close',
