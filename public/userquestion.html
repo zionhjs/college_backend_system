@@ -57,6 +57,12 @@
     <!-- 分割线 -->
     <div class="box-line"></div>
 
+    <!-- searchbox 区域 -->
+    <div class="search-area">
+        <input id="ss" />
+        <input type="button" value="SEARCH">
+    </div>
+
     <!-- datagrid -->
     <div class="table-box">
         <table id="coursett"></table>
@@ -246,7 +252,7 @@
                         handler: function () {
                             //往后台保存数据 成功之后提示成功消息 并关闭对话框
                             var arrData = $('#frmAdd').serializeArray();
-                            console.dir(arrData);
+                            // console.dir(arrData);
                             arrData.push({
                                 name: 'id',
                                 value: Date.now()
