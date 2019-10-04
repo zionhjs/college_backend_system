@@ -29,17 +29,20 @@
 <body>
     <div id="cc" class="easyui-layout" data-options="fit:true">
         <div class="head-container" data-options="region:'north',iconCls:'icon-ok',split:true" style="height:100px;">
-            <h1>BackEnd Management System</h1>
-            <div>
+            <div class="head-left">
+                <h1>BackEnd Management System</h1>
+            </div>
+            <div class="head-right">
                 <h3>admin</h3>
                 <div class="triangle"></div>
+                <div><a href="/login.html">[Log out]</a></div>
             </div>
-            <div>[Log out]</div>
         </div>
 
         <!-- 导航区域 -->
         <div data-options="region:'west',split:true" style="width:200px;">
-            <div id="aa" class="easyui-accordion" data-options="fit:true,multiple:true" style="width:400px;height:900px;">
+            <div id="aa" class="easyui-accordion" data-options="fit:true,multiple:true"
+                style="width:400px;height:900px;">
             </div>
         </div>
 
@@ -55,7 +58,7 @@
         $(function () {
             initMenu();
         });
-        
+
         function initMenu() {
             $.ajax({
                 url: '/api/site_nav',
@@ -67,14 +70,14 @@
                 for (var i = 0; i < resData.data.length; i++) {
                     var childHtml = [];
                     var childLength = resData.data[i].children.length;
-                    for(var j=0; j<childLength; j++){
+                    for (var j = 0; j < childLength; j++) {
                         var t = resData.data[i].children[j];
-                        childHtml.push('<p class="p-box"><a class="menu_link" href="javascript:">'+ t.title +'</a></p>');
+                        childHtml.push('<p class="p-box"><a class="menu_link" href="javascript:">' + t.title + '</a></p>');
                     }
                     //动态添加 aa panel 
                     $('#aa').accordion('add', {
                         title: resData.data[i].title,
-                        iconCls:resData.data[i].iconCls,
+                        iconCls: resData.data[i].iconCls,
                         content: childHtml.join(''),
                         selected: false
                     });
@@ -82,19 +85,19 @@
             });
 
             //#region  点击上一步动态生成的左侧菜单 动态添加tab页签面板 或者让已经存在的面板获取焦点
-            $('#aa').on('click', '.menu_link', function(e){
+            $('#aa').on('click', '.menu_link', function (e) {
                 var title = $(this).text();
                 var url = $(this).attr('url');
                 var iconcls = $(this).attr('iconcls');
                 //先判断我们的超级链接的标题是否在tab中已经存在
                 var isExist = $('#tt').tabs('exists', title);
-                if(isExist){
+                if (isExist) {
                     $('#tt').tabs('select', title);
                     return;
                 }
                 $('#tt').tabs('add', {
-                    title: title, 
-                    closable:true,
+                    title: title,
+                    closable: true,
                     href: url
                 })
             });

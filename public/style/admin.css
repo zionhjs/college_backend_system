@@ -1,30 +1,30 @@
 #cc p{
     text-align:center;
 }
+
 #cc .head-container{
     display:flex;
+    flex-direction: row;
     align-items:center;
+    justify-content:space-between;
+    padding:0 60px;
 }
-#cc .head-container h1{
-    display:inline;
+#cc .head-container .head-left, #cc .head-container .head-right{
+    height:60px;
 }
-#cc .head-container h3{
-    display:inline;
+#cc .head-container .head-right{
+    display:flex;
+    flex-direction: row;
+    align-items:center;
+    justify-content:space-around;
+}
+#cc .head-container .head-right a{
+    margin:0 0 0 30px;
+    text-decoration: none;
 }
 #cc .triangle{
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 9px solid #515151;
-    display: inline;
-    display:relative;
-    top:30px;
-}
-
-.p-box{
-    height:30px;
-    border-bottom:1px solid #515151;
-}
-.p-box a{
-    color:#515151;
-    text-decoration:none;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 8px solid #515151;
+    margin:0 0 0 9px;
 }
