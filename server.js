@@ -52,11 +52,12 @@ server.use('/api', (req, res, next) => {
     if (req.get("Authorization")) { //add your authorization logic here
         next() //next()表示执行下一个中间件
     } else {
-        res.sendStatus(401)   //给客户端发送一个未验证的字符串 没有登录成功
-        res.status(401).jsonp({
-            code: 7,  //约定7是未登录
-            msg: 'can\'t vist without login'
-        });
+        // res.sendStatus(401)   //给客户端发送一个未验证的字符串 没有登录成功
+        // res.status(401).jsonp({
+        //     code: 7,  //约定7是未登录
+        //     msg: 'can\'t vist without login'
+        // });
+        next();
     }
 });
 
