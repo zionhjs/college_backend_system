@@ -101,8 +101,8 @@
 
     <script>
         $(function () {
-            //加载表格的数据
             initTable();
+            initSearchBox();
         });
 
         //#region initTable在 courselist  tab中 加载表格的数据
@@ -294,6 +294,22 @@
                     }]
                 });
             })
+        }
+        //#endregion
+
+        //#region initSearchBox 搜索时候的方法
+        function initSearchBox() {
+            $('#ss').searchbox({
+                width: 300,
+                searcher: function (value, name) {
+                    //param 是设置传给iniTable的参数  _like代表模糊搜索
+                    var str = '{"' + name + '_like":"' + value + '"}';
+                    var param = $.parseJSON(str);
+                    initTable(param)
+                },
+                menu: '#mm',
+                prompt: 'Please Input Value'
+            });
         }
         //#endregion
 
