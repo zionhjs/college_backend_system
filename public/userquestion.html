@@ -36,12 +36,11 @@
             <table id="coursett"></table>
         </div>
     </div>
-    
+
     <script>
         $(function () {
             //加载表格的数据
             initTable();
-            initSearchBox();
         });
 
         //#region initTable在 courselist  tab中 加载表格的数据
@@ -50,8 +49,6 @@
             $('#coursett').datagrid({
                 // url: '/api/course',//rows:一页有多少条，page：请求当前页
                 title: 'CourseList',
-                // width: 800,
-                // height: 400,
                 fit: true,
                 fitColumns: true,
                 method: 'GET',  // http请求的方法
@@ -64,16 +61,11 @@
                 pageList: [10, 20, 30, 40, 50, 60],
                 queryParams: param,   //让表格在加载数据的时候，额外传输的数据
                 columns: [[
-                    { field: 'ck', checkbox: true, align: 'left', width: 50 },
                     { field: 'id', title: 'ID', width: 80 },
-                    { field: 'course_name', title: 'coursename', width: 120, editor: { type: 'text', options: { required: true } } },
-                    { field: 'author', title: 'author', width: 120, editor: { type: 'text' } },
-                    { field: 'college', title: 'college', width: 220, editor: { type: 'text' } },
-                    {
-                        field: 'category_Id', title: 'category', width: 120, editor: { type: 'numberbox' }, formatter: function (value, row, index) {
-                            return 'category' + value;
-                        }
-                    },
+                    { field: 'question_type', title: 'QuestionName', width: 120, editor: { type: 'text', options: { required: true } } },
+                    { field: 'types', title: 'Types', width: 120, editor: { type: 'text' } },
+                    { field: 'question_genre', title: 'QuestionGenre', width: 220, editor: { type: 'text' } },
+                    { field: 'related', title: 'RelatedOrNot', width: 220, editor: { type: 'text' } },
                     {
                         field: 'action', title: 'modification', width: 120, formatter: function (value, row, index) {
                             //如果是编辑状态 那么返回保存和取消
@@ -274,22 +266,6 @@
                 layout: ['list', 'sep', 'first', 'prev', 'sep', 'links', 'next', 'last', 'refresh', 'last']
             });
             //#endregion
-        }
-        //#endregion
-
-        //#region initSearchBox 搜索时候的方法
-        function initSearchBox() {
-            $('#ss').searchbox({
-                width: 300,
-                searcher: function (value, name) {
-                    //param 是设置传给iniTable的参数  _like代表模糊搜索
-                    var str = '{"' + name + '_like":"' + value + '"}';
-                    var param = $.parseJSON(str);
-                    initTable(param)
-                },
-                menu: '#mm',
-                prompt: 'Please Input Value'
-            });
         }
         //#endregion
 
