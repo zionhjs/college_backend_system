@@ -306,11 +306,13 @@
         //#region initSearchBox 搜索时候的方法
         function initSearchBox() {
             $('#ss').searchbox({
-                width: 200,
+                width: 240,
                 searcher: function (value, name) {
                     //param 是设置传给iniTable的参数  _like代表模糊搜索
                     var str = '{"' + name + '_like":"' + value + '"}';
+                    console.log(str);
                     var param = $.parseJSON(str);
+                    console.log(param);
                     initTable(param)
                 },
                 menu: '#mm',
