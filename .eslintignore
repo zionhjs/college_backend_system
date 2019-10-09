@@ -1,0 +1,7 @@
+gulpfile.js
+dist
+node_modules
+src/js
+src/js/tmpl
+# src/js/index.js
+# 加上 # 代表注释
