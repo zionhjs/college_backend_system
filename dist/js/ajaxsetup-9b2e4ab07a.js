@@ -1,0 +1,1 @@
+"use strict";$.ajaxSetup({headers:{Authorization:Cookies.get("auth_token"),zdy:"google.com"},statusCode:{401:function(o,t){$.messager.show({timeout:1500,title:"notice",msg:"please login first! 2s to login-page!",closable:!0}),setTimeout(function(){window.location.href="./login.html"},2e3)}}});

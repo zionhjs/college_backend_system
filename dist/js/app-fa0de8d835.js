@@ -1,0 +1,1 @@
+"use strict";var Mock=require("mockjs");module.exports=function(){return Mock.mock({"course|227":[{"id|+1":1e3,question_type:"@name(1)",types:"@title(1)",question_genre:"@title(2)",related:"@boolean()"}],"course_category|6":[{"id|+1":1,pid:-1,cName:"@ctitle(4)"}]})};

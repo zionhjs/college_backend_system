@@ -1,7 +1,7 @@
 //后台管理文件 自定义路由
 const jsonServer = require('json-server')
 const server = jsonServer.create()   //API returns an Express server
-const router = jsonServer.router('db.json')   //这里定义了基本的数据文件 托管了db.json文件  return JSON Server router
+const router = jsonServer.router('../../db.json')   //这里定义了基本的数据文件 托管了db.json文件  return JSON Server router
 const middlewares = jsonServer.defaults()   //API Returns middlewares used by JSON Server
 
 //使用中间件
